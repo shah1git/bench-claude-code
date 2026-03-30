@@ -1,0 +1,24 @@
+# Общая PostgreSQL для всех 6 вариантов бенчмарка.
+# Каждый проект подключается к своей БД внутри одного контейнера.
+# Порт 5499 — чтобы не конфликтовать с другими PostgreSQL.
+services:
+  benchmark-db:
+    image: postgres:16
+    container_name: benchmark-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: benchmark
+      POSTGRES_PASSWORD: benchmark_dev
+    ports:
+      - "5499:5432"
+    volumes:
+      - benchmark-pgdata:/var/lib/postgresql/data
+      - ./init-databases.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U benchmark"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  benchmark-pgdata:

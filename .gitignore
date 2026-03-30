@@ -1,0 +1,21 @@
+logs/
+pids/
+.DS_Store
+
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Environment
+.env
+.env.local
+
+# Build
+*.tsbuildinfo
+
+# Misc
+*.log
+product-page-*.png
