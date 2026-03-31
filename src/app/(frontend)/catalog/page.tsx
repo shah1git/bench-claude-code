@@ -28,9 +28,9 @@ export default async function CatalogPage() {
             <Link
               key={product.id}
               href={`/catalog/${product.slug}`}
-              className="group border border-gray-100 rounded-xl overflow-hidden hover:shadow-lg hover:border-gray-200 transition-all"
+              className="group bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-lg hover:border-gray-200 transition-all duration-200"
             >
-              <div className="relative aspect-square bg-gray-50">
+              <div className="relative aspect-square bg-gray-50/50">
                 {firstImage && (
                   <Image
                     src={firstImage.url}
@@ -42,22 +42,22 @@ export default async function CatalogPage() {
                 )}
               </div>
               <div className="p-5">
-                <h2 className="font-semibold text-gray-900 group-hover:text-accent transition-colors">
+                <h2 className="font-semibold text-gray-900 group-hover:text-accent transition-colors leading-snug">
                   {product.name}
                 </h2>
                 {product.shortDescription && (
-                  <p className="text-sm text-gray-500 mt-2 line-clamp-2">
+                  <p className="text-sm text-gray-500 mt-2 line-clamp-2 leading-relaxed">
                     {product.shortDescription}
                   </p>
                 )}
-                <div className="flex items-center justify-between mt-4">
+                <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-50">
                   {product.price && (
                     <span className="text-lg font-bold text-gray-900">
                       {formatPrice(product.price)}
                     </span>
                   )}
-                  <span className="text-sm text-accent font-medium group-hover:underline">
-                    Подробнее
+                  <span className="text-sm text-accent font-medium group-hover:translate-x-0.5 transition-transform">
+                    Подробнее &rarr;
                   </span>
                 </div>
               </div>
