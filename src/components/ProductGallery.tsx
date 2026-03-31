@@ -14,16 +14,29 @@ export function ProductGallery({ images }: { images: GalleryImage[] }) {
   const active = images[activeIndex]
 
   return (
-    <div>
-      {/* Desktop: vertical thumbnails left + main image right */}
-      <div className="hidden md:flex gap-3">
-        {/* Vertical thumbnails */}
-        <div className="flex flex-col gap-2 overflow-y-auto max-h-[560px] scrollbar-hide">
+    <div className="space-y-3">
+      {/* Main image */}
+      <div className="relative aspect-[4/3] bg-gray-50/50 rounded-2xl overflow-hidden border border-gray-100">
+        {active && (
+          <Image
+            src={active.url}
+            alt={active.alt || active.filename}
+            fill
+            className="object-contain p-8"
+            sizes="(max-width: 1024px) 100vw, 55vw"
+            priority
+          />
+        )}
+      </div>
+
+      {/* Horizontal thumbnails */}
+      {images.length > 1 && (
+        <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
           {images.map((img, i) => (
             <button
               key={i}
               onClick={() => setActiveIndex(i)}
-              className={`relative w-[72px] h-[72px] flex-shrink-0 rounded-lg border-2 overflow-hidden bg-gray-50 transition-all ${
+              className={`relative w-[72px] h-[72px] flex-shrink-0 rounded-xl border-2 overflow-hidden bg-gray-50 transition-all ${
                 i === activeIndex
                   ? 'border-accent ring-1 ring-accent/20'
                   : 'border-gray-100 hover:border-gray-300'
@@ -39,59 +52,7 @@ export function ProductGallery({ images }: { images: GalleryImage[] }) {
             </button>
           ))}
         </div>
-
-        {/* Main image */}
-        <div className="relative flex-1 aspect-square bg-gray-50/50 rounded-2xl overflow-hidden border border-gray-100">
-          {active && (
-            <Image
-              src={active.url}
-              alt={active.alt || active.filename}
-              fill
-              className="object-contain p-8"
-              sizes="(max-width: 1024px) 50vw, 600px"
-              priority
-            />
-          )}
-        </div>
-      </div>
-
-      {/* Mobile: main image top + horizontal thumbnails below */}
-      <div className="md:hidden space-y-3">
-        <div className="relative aspect-square bg-gray-50/50 rounded-2xl overflow-hidden border border-gray-100">
-          {active && (
-            <Image
-              src={active.url}
-              alt={active.alt || active.filename}
-              fill
-              className="object-contain p-6"
-              sizes="100vw"
-              priority
-            />
-          )}
-        </div>
-
-        <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
-          {images.map((img, i) => (
-            <button
-              key={i}
-              onClick={() => setActiveIndex(i)}
-              className={`relative w-16 h-16 flex-shrink-0 rounded-lg border-2 overflow-hidden bg-gray-50 transition-all ${
-                i === activeIndex
-                  ? 'border-accent ring-1 ring-accent/20'
-                  : 'border-gray-100 hover:border-gray-300'
-              }`}
-            >
-              <Image
-                src={img.url}
-                alt={img.alt || img.filename}
-                fill
-                className="object-contain p-1"
-                sizes="64px"
-              />
-            </button>
-          ))}
-        </div>
-      </div>
+      )}
     </div>
   )
 }

@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 8rem;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
     sans-serif;
@@ -11,7 +16,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Scrollbar hiding utility */
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -93,7 +97,6 @@ body {
   @apply text-accent hover:underline;
 }
 
-/* First heading inside prose description — no top margin */
 .prose > h1:first-child,
 .prose > h2:first-child,
 .prose > h3:first-child {
