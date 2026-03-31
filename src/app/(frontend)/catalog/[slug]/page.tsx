@@ -88,14 +88,14 @@ export default async function ProductPage({ params }: Props) {
         <span className="text-gray-600 truncate">{product.name}</span>
       </nav>
 
-      {/* Top section: Gallery + Info — two columns on desktop */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
-        {/* Gallery — takes 7 of 12 columns */}
+      {/* ===== TOP BLOCK: Gallery + Info (two columns on desktop) ===== */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+        {/* Gallery — 7 of 12 columns */}
         <div className="lg:col-span-7">
           <ProductGallery images={images} />
         </div>
 
-        {/* Product Info — takes 5 of 12 columns */}
+        {/* Product Info — 5 of 12 columns */}
         <div className="lg:col-span-5">
           <div className="lg:sticky lg:top-24 space-y-5">
             {/* Article number */}
@@ -126,7 +126,7 @@ export default async function ProductPage({ params }: Props) {
 
             {/* Key Specs with icons */}
             {keySpecs.length > 0 && (
-              <div className="border border-gray-100 rounded-xl divide-y divide-gray-100">
+              <div className="border border-gray-100 rounded-xl divide-y divide-gray-100 bg-gray-50/30">
                 {keySpecs.map((spec: any, i: number) => (
                   <div key={i} className="flex items-center gap-3 px-4 py-3">
                     <KeySpecIcon label={spec.label} />
@@ -160,10 +160,25 @@ export default async function ProductPage({ params }: Props) {
         </div>
       </div>
 
-      {/* Tabs Section — full width below */}
+      {/* ===== FULL DESCRIPTION — separate section, always visible ===== */}
+      {descriptionHtml && (
+        <section className="mt-12 sm:mt-16">
+          <div className="border-t border-gray-100 pt-8 sm:pt-10">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+              <span className="w-1 h-6 bg-accent rounded-full" />
+              Описание
+            </h2>
+            <div
+              className="prose max-w-none"
+              dangerouslySetInnerHTML={{ __html: descriptionHtml }}
+            />
+          </div>
+        </section>
+      )}
+
+      {/* ===== TABS: Specs, Video, Articles ===== */}
       <div className="mt-12 sm:mt-16 border-t border-gray-100 pt-8">
         <ProductTabs
-          description={descriptionHtml}
           specSchema={product.specSchema || []}
           specs={product.specs || {}}
           videoLinks={product.videoLinks || []}
@@ -175,7 +190,7 @@ export default async function ProductPage({ params }: Props) {
         />
       </div>
 
-      {/* Inquiry Form */}
+      {/* ===== INQUIRY FORM ===== */}
       <div id="inquiry" className="mt-16 scroll-mt-24">
         <div className="max-w-2xl mx-auto">
           <div className="border border-gray-100 rounded-2xl p-6 sm:p-8">

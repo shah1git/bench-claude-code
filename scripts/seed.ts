@@ -67,7 +67,7 @@ async function fetchSnapshot(): Promise<any> {
   }
 
   // Fetch from API
-  const url = 'http://media.rikanv.ru/public/snapshots/f2b6743d91fbe2b12a4bad2cc7ed7e15'
+  const url = 'http://media.rikanv.ru/public/snapshots/ac7e7a437b5ea81da6e1f205cf61e568'
   console.log('Fetching snapshot from API...')
   return new Promise((resolve, reject) => {
     http.get(url, (res) => {

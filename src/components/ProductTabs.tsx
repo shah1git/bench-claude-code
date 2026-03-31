@@ -21,7 +21,6 @@ type VideoLink = {
 }
 
 type Props = {
-  description: string
   specSchema: SpecSection[]
   specs: Record<string, string>
   videoLinks: VideoLink[]
@@ -33,15 +32,14 @@ function getYouTubeId(url: string): string | null {
   return match ? match[1] : null
 }
 
-export function ProductTabs({ description, specSchema, specs, videoLinks, articles }: Props) {
+export function ProductTabs({ specSchema, specs, videoLinks, articles }: Props) {
   const tabs = [
-    { id: 'description', label: 'Описание' },
     { id: 'specs', label: 'Характеристики' },
     ...(videoLinks.length > 0 ? [{ id: 'video', label: 'Видео' }] : []),
     ...(articles.length > 0 ? [{ id: 'articles', label: 'Статьи' }] : []),
   ]
 
-  const [activeTab, setActiveTab] = useState('description')
+  const [activeTab, setActiveTab] = useState('specs')
 
   return (
     <div>
@@ -62,6 +60,9 @@ export function ProductTabs({ description, specSchema, specs, videoLinks, articl
               {tab.id === 'video' && (
                 <span className="ml-1.5 text-xs text-gray-300">{videoLinks.length}</span>
               )}
+              {tab.id === 'articles' && (
+                <span className="ml-1.5 text-xs text-gray-300">{articles.length}</span>
+              )}
             </button>
           ))}
         </div>
@@ -69,24 +70,17 @@ export function ProductTabs({ description, specSchema, specs, videoLinks, articl
 
       {/* Tab content */}
       <div className="py-8">
-        {/* Description */}
-        {activeTab === 'description' && (
-          <div
-            className="prose max-w-none"
-            dangerouslySetInnerHTML={{ __html: description }}
-          />
-        )}
-
         {/* Specifications - all sections expanded */}
         {activeTab === 'specs' && (
-          <div className="space-y-6">
+          <div className="space-y-8">
             {specSchema.map((section) => {
               const sectionSpecs = section.params.filter((p) => specs[p.id])
               if (sectionSpecs.length === 0) return null
 
               return (
                 <div key={section.id}>
-                  <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3 pl-1">
+                  <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-3 flex items-center gap-2">
+                    <span className="w-1 h-4 bg-accent/60 rounded-full" />
                     {section.label_ru}
                   </h3>
                   <div className="rounded-xl border border-gray-100 overflow-hidden">

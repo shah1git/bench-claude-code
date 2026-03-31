@@ -21,6 +21,10 @@ body {
 }
 
 /* Prose styles for markdown content */
+.prose h1 {
+  @apply text-2xl font-bold mt-10 mb-4 text-gray-900;
+}
+
 .prose h2 {
   @apply text-xl font-semibold mt-8 mb-3 text-gray-900;
 }
@@ -62,15 +66,23 @@ body {
 }
 
 .prose table {
-  @apply w-full border-collapse my-6;
+  @apply w-full border-collapse my-6 text-sm;
+}
+
+.prose thead {
+  @apply bg-gray-50;
 }
 
 .prose th {
-  @apply text-left text-sm font-semibold text-gray-900 border-b-2 border-gray-200 py-2 px-3;
+  @apply text-left font-semibold text-gray-900 border-b-2 border-gray-200 py-2.5 px-3;
 }
 
 .prose td {
-  @apply text-sm text-gray-700 border-b border-gray-100 py-2 px-3;
+  @apply text-gray-700 border-b border-gray-100 py-2.5 px-3;
+}
+
+.prose tr:nth-child(even) {
+  @apply bg-gray-50/50;
 }
 
 .prose img {
@@ -79,4 +91,11 @@ body {
 
 .prose a {
   @apply text-accent hover:underline;
+}
+
+/* First heading inside prose description — no top margin */
+.prose > h1:first-child,
+.prose > h2:first-child,
+.prose > h3:first-child {
+  @apply mt-0;
 }
