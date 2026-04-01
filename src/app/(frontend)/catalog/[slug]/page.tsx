@@ -117,12 +117,6 @@ export default async function ProductPage({ params }: Props) {
               {product.name}
             </h1>
 
-            {product.price != null && (
-              <div className="text-3xl font-bold text-gray-900 tracking-tight">
-                {formatPrice(product.price)}
-              </div>
-            )}
-
             {product.shortDescription && (
               <p className="text-gray-600 leading-relaxed text-[15px]">
                 {product.shortDescription}
@@ -154,13 +148,20 @@ export default async function ProductPage({ params }: Props) {
               </div>
             )}
 
-            {/* CTA */}
-            <a
-              href="#inquiry"
-              className="flex items-center justify-center gap-2.5 w-full bg-accent hover:bg-accent-hover text-white font-medium rounded-xl px-6 py-3.5 text-sm transition-colors"
-            >
-              Оставить заявку
-            </a>
+            {/* Price + CTA */}
+            <div className="flex items-center justify-between pt-1">
+              {product.price != null && (
+                <div className="text-2xl font-bold text-gray-900 tracking-tight">
+                  {formatPrice(product.price)}
+                </div>
+              )}
+              <a
+                href="#inquiry"
+                className="inline-flex items-center gap-2 border border-accent text-accent hover:bg-accent hover:text-white font-medium rounded-lg px-5 py-2 text-sm transition-colors"
+              >
+                Оставить заявку
+              </a>
+            </div>
           </div>
         </div>
       </div>
