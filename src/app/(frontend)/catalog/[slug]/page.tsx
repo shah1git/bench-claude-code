@@ -9,16 +9,16 @@ import { formatPrice } from '@/lib/utils'
 import { ProductGallery } from '@/components/ProductGallery'
 import { ProductTabs } from '@/components/ProductTabs'
 import { InquiryForm } from '@/components/InquiryForm'
-import { Cpu, Aperture, Thermometer, Crosshair, Eye, Scale } from 'lucide-react'
+import { Cpu, Aperture, Thermometer, Crosshair, Eye, Scale, type LucideIcon } from 'lucide-react'
 
-const KEY_SPEC_DEFS = [
-  { key: 'sensor_resolution', label: 'Матрица', Icon: Cpu },
-  { key: 'optics_objective_lens', label: 'Объектив', Icon: Aperture },
-  { key: 'sensor_netd', label: 'NETD', Icon: Thermometer },
-  { key: 'lrf_range_measurement', label: 'Дальномер', Icon: Crosshair },
-  { key: 'sensor_detection_range', label: 'Обнаружение', Icon: Eye },
-  { key: 'env_weight', label: 'Вес', Icon: Scale },
-]
+const ICON_BY_LABEL: Record<string, LucideIcon> = {
+  'Матрица': Cpu,
+  'Объектив': Aperture,
+  'NETD': Thermometer,
+  'Дальномер': Crosshair,
+  'Обнаружение': Eye,
+  'Вес': Scale,
+}
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -73,18 +73,11 @@ export default async function ProductPage({ params }: Props) {
     alt: img.alt || product.name,
   }))
 
-  // Key specs from data or fallback
-  const keySpecs =
-    product.keySpecs?.length > 0
-      ? product.keySpecs.map((ks: any) => ({
-          ...ks,
-          Icon: KEY_SPEC_DEFS.find((d) => d.label === ks.label)?.Icon || Cpu,
-        }))
-      : KEY_SPEC_DEFS.filter((d) => product.specs?.[d.key]).map((d) => ({
-          label: d.label,
-          value: product.specs[d.key],
-          Icon: d.Icon,
-        }))
+  // Key specs from DB
+  const keySpecs = (product.keySpecs || []).map((ks: any) => ({
+    ...ks,
+    Icon: ICON_BY_LABEL[ks.label] || Cpu,
+  }))
 
   // Serializable articles for tabs
   const articlesForTabs = articles.map((a: any) => ({
