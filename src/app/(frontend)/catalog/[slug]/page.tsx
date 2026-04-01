@@ -8,7 +8,6 @@ import Link from 'next/link'
 import { formatPrice } from '@/lib/utils'
 import { ProductGallery } from '@/components/ProductGallery'
 import { ProductTabs } from '@/components/ProductTabs'
-import { InquiryForm } from '@/components/InquiryForm'
 import { Cpu, Aperture, Crosshair, Eye, type LucideIcon } from 'lucide-react'
 import { CartButtons } from '@/components/CartButtons'
 
@@ -156,12 +155,12 @@ export default async function ProductPage({ params }: Props) {
             {/* Cart buttons */}
             <CartButtons />
 
-            {/* Secondary CTA */}
+            {/* Secondary link */}
             <a
-              href="#inquiry"
-              className="inline-flex items-center gap-1.5 text-sm text-accent hover:text-accent-hover transition-colors"
+              href="#"
+              className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-accent transition-colors"
             >
-              Оставить заявку &rarr;
+              Помочь с выбором &rarr;
             </a>
           </div>
         </div>
@@ -178,18 +177,6 @@ export default async function ProductPage({ params }: Props) {
         />
       </div>
 
-      {/* Inquiry Form */}
-      <section id="inquiry" className="pt-16 pb-8">
-        <div className="max-w-2xl mx-auto">
-          <div className="border border-gray-100 rounded-2xl p-6 sm:p-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-1">Заказать консультацию</h2>
-            <p className="text-sm text-gray-400 mb-6">
-              Оставьте заявку, и наш менеджер свяжется с вами для уточнения деталей
-            </p>
-            <InquiryForm productId={product.id} />
-          </div>
-        </div>
-      </section>
     </div>
   )
 }
