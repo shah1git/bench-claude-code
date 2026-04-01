@@ -9,15 +9,14 @@ import { formatPrice } from '@/lib/utils'
 import { ProductGallery } from '@/components/ProductGallery'
 import { ProductTabs } from '@/components/ProductTabs'
 import { InquiryForm } from '@/components/InquiryForm'
-import { Cpu, Aperture, Thermometer, Crosshair, Eye, Scale, type LucideIcon } from 'lucide-react'
+import { Cpu, Aperture, Crosshair, Eye, type LucideIcon } from 'lucide-react'
+import { CartButtons } from '@/components/CartButtons'
 
 const ICON_BY_LABEL: Record<string, LucideIcon> = {
   'Матрица': Cpu,
   'Объектив': Aperture,
-  'NETD': Thermometer,
   'Дальномер': Crosshair,
   'Обнаружение': Eye,
-  'Вес': Scale,
 }
 
 type Props = {
@@ -117,13 +116,19 @@ export default async function ProductPage({ params }: Props) {
               {product.name}
             </h1>
 
+            {product.price != null && (
+              <div className="text-2xl font-bold text-gray-900 tracking-tight">
+                {formatPrice(product.price)}
+              </div>
+            )}
+
             {product.shortDescription && (
               <p className="text-gray-600 leading-relaxed text-[15px]">
                 {product.shortDescription}
               </p>
             )}
 
-            {/* Key Specs 2x3 */}
+            {/* Key Specs 2x2 */}
             {keySpecs.length > 0 && (
               <div className="grid grid-cols-2 gap-3">
                 {keySpecs.map((spec: any, i: number) => {
@@ -148,20 +153,16 @@ export default async function ProductPage({ params }: Props) {
               </div>
             )}
 
-            {/* Price + CTA */}
-            <div className="flex items-center justify-between pt-1">
-              {product.price != null && (
-                <div className="text-2xl font-bold text-gray-900 tracking-tight">
-                  {formatPrice(product.price)}
-                </div>
-              )}
-              <a
-                href="#inquiry"
-                className="inline-flex items-center gap-2 border border-accent text-accent hover:bg-accent hover:text-white font-medium rounded-lg px-5 py-2 text-sm transition-colors"
-              >
-                Оставить заявку
-              </a>
-            </div>
+            {/* Cart buttons */}
+            <CartButtons />
+
+            {/* Secondary CTA */}
+            <a
+              href="#inquiry"
+              className="inline-flex items-center gap-1.5 text-sm text-accent hover:text-accent-hover transition-colors"
+            >
+              Оставить заявку &rarr;
+            </a>
           </div>
         </div>
       </div>

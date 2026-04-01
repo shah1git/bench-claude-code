@@ -156,10 +156,8 @@ async function seed() {
       keySpecs: [
         { label: 'Матрица', value: product.specs.sensor_resolution },
         { label: 'Объектив', value: product.specs.optics_objective_lens },
-        { label: 'NETD', value: product.specs.sensor_netd },
-        { label: 'Дальномер', value: product.specs.lrf_range },
         { label: 'Обнаружение', value: product.specs.detection_range },
-        { label: 'Вес', value: product.specs.weight },
+        { label: 'Дальномер', value: product.specs.lrf_range },
       ].filter((s) => s.value),
       productLine: product.productLine,
       formFactor: product.formFactor,
