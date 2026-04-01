@@ -152,16 +152,16 @@ export default async function ProductPage({ params }: Props) {
               </div>
             )}
 
-            {/* Cart buttons */}
-            <CartButtons />
-
-            {/* Secondary link */}
+            {/* Primary CTA */}
             <a
               href="#"
-              className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-accent transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent-hover text-white font-medium rounded-lg px-5 py-2.5 text-sm transition-colors"
             >
               Помочь с выбором &rarr;
             </a>
+
+            {/* Secondary CTA */}
+            <CartButtons />
           </div>
         </div>
       </div>
